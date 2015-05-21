@@ -111,7 +111,7 @@ class skroutz extends framework {
 	 * @since 150130
 	 */
 	public function processProducts() {
-		$prodArray = (array) $this->©db->get_col( 'SELECT ID FROM ' . $this->©db->posts . ' WHERE post_type="product"' );
+		$prodArray = (array) $this->©db->get_col( 'SELECT ID FROM ' . $this->©db->posts . ' WHERE post_type="product" AND post_status="publish"' );
 
 		$wpMemLimit = $this->getMemInM(WP_MAX_MEMORY_LIMIT)/1024/1024;
 
@@ -162,7 +162,7 @@ class skroutz extends framework {
 
 			$this->©xml->appendProduct( $this->getProductArray( $product ) );
 		}
-
+		wp_cache_flush();
 		return $this->©xml->saveXML() ? $this->©xml->countProductsInFile( $this->©xml->simpleXML ) : 0;
 	}
 

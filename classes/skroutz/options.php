@@ -79,11 +79,11 @@ class options extends \xd_v141226_dev\options {
 			// Include products
 			'products_include'                           => array( 'product' ),
 			// Availability when products in stock
-			'avail_inStock'                              => 1,
+			'avail_inStock'                              => 0,
 			// Availability when products out stock
-			'avail_outOfStock'                           => 0,
+			'avail_outOfStock'                           => 6,
 			// Availability when products out stock and backorders are allowed
-			'avail_backorders'                           => count( $this->availOptions ),
+			'avail_backorders'                           => 6,
 			/*********************
 			 * Custom fields
 			 ********************/
@@ -97,7 +97,7 @@ class options extends \xd_v141226_dev\options {
 			'map_manufacturer'                           => 0,
 			'map_mpn'                                    => 0,
 			'map_size'                                   => array(),
-			'map_size_use'                               => 1,
+			'map_size_use'                               => 0,
 			'map_color'                                  => array(),
 			'map_color_use'                              => 0,
 			/***********************************************
