@@ -119,12 +119,9 @@ class skroutz extends framework
     {
         $prodArray = (array)$this->©db->get_col('SELECT ID FROM '.$this->©db->posts.' WHERE post_type="product" AND post_status="publish"');
 
+        $this->©env->maximize_time_memory_limits();
+
         $mem = $this->getMemInM(ini_get('memory_limit')) / 1024 / 1024;
-
-        $time = max(ceil(count($prodArray) * 0.5), 30);
-        set_time_limit($time);
-
-        $this->©diagnostic->forceDBLog('product', array(), 'Memory set to '.$mem.'M for current session<br>Time set to '.$time.' sec for current session');
 
         $memLimit = ($mem - 10) * 1024 * 1024;
 
@@ -719,4 +716,25 @@ class skroutz extends framework
 
         return false;
     }
+
+	/**
+	 * @return bool
+	 * @author Panagiotis Vagenas <pan.vagenas@gmail.com>
+	 * @since 150707
+	 */
+	public function hasBrandsPlugin(){
+		return is_plugin_active('woocommerce-brands/woocommerce-brands.php') && taxonomy_exists('product_brand');
+	}
+
+	/**
+	 * @return bool|null|object
+	 * @author Panagiotis Vagenas <pan.vagenas@gmail.com>
+	 * @since 150707
+	 */
+	public function getBrandsPluginTaxonomy(){
+		if($this->hasBrandsPlugin()){
+			return get_taxonomy('product_brand');
+		}
+		return null;
+	}
 }
